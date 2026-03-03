@@ -1,0 +1,336 @@
+/* ============================================================
+   style.css — Leopold Keyboards
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --red:      #e8192c;
+  --red-dark: #a00d1c;
+  --gold:     #d4a843;
+  --black:    #0a0a0a;
+  --navy:     #0d1b3e;
+  --navy-mid: #14275a;
+  --cyan:     #00f5ff;
+  --white:    #f0ede8;
+  --gray:     #888;
+  --salmon:   #f08080;
+  --salmon-d: #e06060;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── NAV ──────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  height: 58px;
+  background: linear-gradient(135deg, #cc0012 0%, #8b0000 55%, #3a0000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  box-shadow: 0 3px 24px rgba(200,0,0,.5);
+}
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.65rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+}
+.logo span { color: var(--white); }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: .88rem;
+  font-weight: 500;
+  letter-spacing: .5px;
+  transition: color .2s;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+.nav-links a:hover     { color: var(--gold); }
+.nav-links a.active    { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ── SHARED BUTTONS ───────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: .7rem 1.8rem;
+  border: 2px solid var(--white);
+  background: transparent;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: .78rem;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all .22s;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.btn:hover       { background: var(--white); color: var(--black); }
+.btn-red         { background: var(--red); border-color: var(--red); color: var(--white); border-radius: 6px; text-decoration: none; display: inline-block; }
+.btn-red:hover   { background: var(--red-dark); border-color: var(--red-dark); }
+
+/* ── CANVAS WRAPPER ───────────────────────────────────── */
+.canvas-wrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #1a1a1a;
+  width: 100%;
+  display: block;
+}
+.canvas-wrap canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+.canvas-wrap.interactive { cursor: grab; }
+.canvas-wrap.interactive:active { cursor: grabbing; }
+
+.loading-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1rem;
+  background: rgba(14,14,14,.9);
+  border-radius: 16px;
+  z-index: 5;
+  transition: opacity .5s;
+}
+.loading-overlay span { font-size: .88rem; color: #bbb; letter-spacing: 1px; }
+.spinner {
+  width: 38px; height: 38px;
+  border: 3px solid rgba(255,255,255,.15);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.model-hint { text-align: center; font-size: .74rem; color: var(--gray); margin-top: .55rem; letter-spacing: 1px; }
+
+/* ============================================================
+   HOME PAGE
+   ============================================================ */
+.home-body { background: var(--black); }
+.home-body main { padding-top: 58px; }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 4.5rem 5rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero-label { font-size: .82rem; color: var(--gray); letter-spacing: 1.5px; margin-bottom: .4rem; }
+.hero h1    { font-family: 'Bebas Neue', sans-serif; font-size: 6rem; line-height: .95; margin-bottom: 1.4rem; letter-spacing: 2px; }
+.hero p     { font-size: 1rem; line-height: 1.75; color: #ccc; margin-bottom: 2rem; }
+.hero-photo {
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+  background: #111;
+}
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Bestsellers */
+.bestsellers { padding: 0 5rem 4rem; max-width: 1200px; margin: 0 auto; }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; text-align: center; letter-spacing: 3px; margin-bottom: 2rem; }
+.cards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; }
+.card {
+  background: linear-gradient(145deg, var(--salmon), var(--salmon-d));
+  border-radius: 18px; padding: 1.8rem;
+  color: #1a0000;
+  position: relative; overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(232,25,44,.25); }
+.card::before {
+  content:''; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,255,255,.06) 10px,rgba(255,255,255,.06) 20px);
+}
+.card-body { position: relative; z-index: 1; }
+.card h3   { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 1px; margin-bottom: .8rem; color: #1a0000; }
+.card p    { font-size: .82rem; line-height: 1.65; color: #3a0000; margin-bottom: 1.5rem; min-height: 80px; }
+
+/* Home bottom 3D keyboard (static — colour syncs from details page) */
+.home-3d-section { padding: 0 3rem 5rem; max-width: 1200px; margin: 0 auto; }
+.home-3d-section .canvas-wrap { height: 320px; border-radius: 14px; border: 5px solid #333; }
+
+/* ============================================================
+   DETAILS PAGE
+   ============================================================ */
+.details-body { background: var(--black); }
+.details-body main { padding-top: 58px; padding-bottom: 6rem; }
+
+.details-hero { padding: 3.5rem 5rem 2rem; max-width: 900px; }
+.breadcrumb   { font-size: .78rem; color: var(--gray); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: .5rem; }
+.details-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; letter-spacing: 2px; line-height: 1.05; margin-bottom: .9rem; }
+.details-hero p  { font-size: 1rem; color: #bbb; line-height: 1.75; max-width: 580px; }
+
+/* Keyboard photo on details page */
+.details-photo-section { padding: 0 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.details-photo { border-radius: 14px; overflow: hidden; background: #111; }
+.details-photo img { width: 100%; display: block; object-fit: cover; max-height: 420px; }
+
+/* Specs */
+.specs-section   { padding: 2rem 5rem; max-width: 1100px; margin: 0 auto; }
+.specs-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; letter-spacing: 2px; margin-bottom: 1.4rem; }
+.specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: stretch; }
+.specs-card {
+  background: linear-gradient(145deg, var(--salmon), var(--salmon-d));
+  border-radius: 16px; padding: 1.6rem 2rem;
+  position: relative; overflow: hidden;
+}
+.specs-card::before {
+  content:''; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,255,255,.05) 10px,rgba(255,255,255,.05) 20px);
+}
+.specs-photo {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f5f5f5;
+  min-height: 260px;
+}
+.specs-photo img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 16px; }
+.spec-row { display: flex; justify-content: space-between; align-items: center; padding: .6rem 0; border-bottom: 1px solid rgba(0,0,0,.1); position: relative; z-index: 1; }
+.spec-row:last-child { border-bottom: none; }
+.spec-label { font-size: .78rem; color: rgba(0,0,0,.5); }
+.spec-val   { font-size: .88rem; font-weight: 600; color: #1a0000; }
+.spec-val.hi { color: #7a0000; }
+
+/* Colour options */
+.colours-section   { padding: 2rem 5rem 1rem; max-width: 1100px; margin: 0 auto; }
+.colours-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; letter-spacing: 2px; margin-bottom: 1.4rem; }
+.colour-card   { background: var(--navy); border-radius: 16px; padding: 1.8rem 2rem; display: inline-flex; gap: 2rem; }
+.colour-opt    { display: flex; flex-direction: column; align-items: center; gap: .55rem; cursor: pointer; }
+.swatch {
+  width: 66px; height: 66px; border-radius: 15px;
+  border: 3px solid transparent;
+  box-shadow: 0 4px 16px rgba(0,0,0,.45);
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+.colour-opt:hover .swatch        { transform: scale(1.08); border-color: rgba(255,255,255,.45); }
+.colour-opt.active .swatch       { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(0,245,255,.35); transform: scale(1.08); }
+.colour-opt span                 { font-size: .8rem; color: #888; transition: color .2s; }
+.colour-opt.active span          { color: var(--white); }
+
+/* Details bottom interactive 3D keyboard */
+.details-3d-section { padding: .5rem 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.details-3d-section .canvas-wrap { height: 380px; }
+
+/* Details CTA */
+.details-cta { text-align: center; padding: 4rem 4rem 2rem; }
+.details-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; letter-spacing: 2px; margin-bottom: .5rem; }
+.details-cta p  { color: var(--gray); font-size: .85rem; margin-bottom: 1.5rem; }
+
+/* ============================================================
+   PREORDER PAGE
+   ============================================================ */
+.preorder-body { background: var(--navy); }
+.preorder-body main { padding-top: 58px; }
+
+.preorder-grid {
+  max-width: 1200px; margin: 0 auto; padding: 3rem 4rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 3rem; align-items: start;
+}
+.preorder-left { display: flex; flex-direction: column; gap: 2rem; }
+
+/* Static keyboard photo on preorder — no interaction */
+.preorder-photo {
+  border-radius: 14px; overflow: hidden;
+  background: #f0ede8;
+  box-shadow: 0 8px 30px rgba(0,0,0,.4);
+}
+.preorder-photo img { width: 100%; display: block; object-fit: cover; }
+
+/* What's included */
+.included h2 { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; letter-spacing: 1px; margin-bottom: 1.2rem; line-height: 1; }
+.inc-list    { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+.inc-list li { display: flex; align-items: center; gap: .85rem; font-size: 1rem; color: #ddd; }
+.check       { width: 26px; height: 26px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: .75rem; font-weight: 700; color: #fff; }
+
+/* Configurator */
+.configurator {
+  background: var(--navy-mid);
+  border-radius: 20px; padding: 2.2rem;
+  border: 1px solid rgba(255,255,255,.07);
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+.price-row  { display: flex; align-items: baseline; gap: .9rem; margin-bottom: .4rem; }
+.price-main { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; letter-spacing: 1px; line-height: 1; }
+.price-orig { font-size: 1.3rem; color: var(--gray); text-decoration: line-through; }
+.save-badge { background: var(--cyan); color: #000; font-size: .78rem; font-weight: 700; padding: .3rem 1rem; border-radius: 20px; letter-spacing: .5px; display: inline-block; margin-bottom: 1.6rem; }
+.cfg-label  { font-size: .72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--white); margin-bottom: .7rem; margin-top: 1.3rem; }
+
+.colour-btns { display: flex; gap: .6rem; }
+.cbtn {
+  flex: 1; padding: .6rem 0; border-radius: 50px;
+  border: 2px solid transparent; cursor: pointer;
+  font-size: .85rem; font-family: 'DM Sans', sans-serif;
+  font-weight: 600; text-align: center; transition: all .2s;
+}
+.cbtn.c-black  { background: #111; color: #fff; border-color: #333; }
+.cbtn.c-white  { background: #f0f0f0; color: #111; border-color: #ccc; }
+.cbtn.c-navy   { background: #0d2060; color: #fff; border-color: #1e3a8a; }
+.cbtn.active   { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(0,245,255,.3); }
+
+.switch-btns { display: flex; flex-direction: column; gap: .5rem; }
+.swbtn {
+  padding: .8rem 1.2rem; border-radius: 8px;
+  border: 2px solid transparent; cursor: pointer;
+  font-size: .88rem; font-family: 'DM Sans', sans-serif;
+  font-weight: 500; text-align: left; transition: all .18s;
+}
+.swbtn.s-red   { background: var(--red);  color: #fff; }
+.swbtn.s-black { background: #111;        color: #fff; }
+.swbtn.s-brown { background: #5c3010;     color: #fff; }
+.swbtn.active  { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(0,245,255,.25); }
+
+.summary { background: rgba(0,0,0,.3); border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 1.6rem; }
+.sum-row { display: flex; justify-content: space-between; align-items: center; padding: .5rem 0; font-size: .9rem; color: #aaa; border-bottom: 1px solid rgba(255,255,255,.05); }
+.sum-row:last-child { border-bottom: none; }
+.sum-row.total      { color: var(--white); font-weight: 700; font-size: 1.05rem; padding-top: .9rem; }
+.sum-val      { color: var(--white); }
+.sum-val.free { color: #22c55e; font-weight: 700; }
+.sum-val.big  { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--cyan); }
+
+.btn-preorder {
+  width: 100%; margin-top: 1.4rem; padding: 1rem 2rem;
+  background: var(--cyan); border: none; border-radius: 50px;
+  color: #000; font-size: 1rem; font-family: 'DM Sans', sans-serif;
+  font-weight: 700; cursor: pointer; display: flex; align-items: center;
+  justify-content: center; gap: .6rem; transition: background .2s, transform .15s;
+}
+.btn-preorder:hover { background: #00dde9; transform: translateY(-1px); }
+.delivery-note { text-align: center; font-size: .74rem; color: rgba(255,255,255,.3); margin-top: .7rem; }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero, .preorder-grid             { grid-template-columns: 1fr; padding: 2rem; }
+  .cards-grid, .specs-grid          { grid-template-columns: 1fr; }
+  .bestsellers, .details-hero,
+  .details-photo-section,
+  .specs-section, .colours-section,
+  .details-3d-section, .home-3d-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+}

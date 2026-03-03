@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leopold Keyboards — Pre-Order</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="preorder-body" data-page="preorder">
+
+  <nav>
+    <a class="logo" href="index.html">LEO<span>POLO</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html"    data-page="home">Home</a></li>
+      <li><a href="details.html"  data-page="details">Details</a></li>
+      <li><a href="preorder.html" data-page="preorder">Pre-Order</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="preorder-grid">
+
+      <!-- LEFT: 3D keyboard viewer (static auto-rotate, colour changes via buttons) + What's Included -->
+      <div class="preorder-left">
+
+        <!-- 3D keyboard — auto-rotates slowly, NO drag/zoom, colour syncs from colour buttons -->
+        <div id="preorder-kb-viewer" class="canvas-wrap" style="height:320px;">
+          <div id="preorder-kb-loading" class="loading-overlay">
+            <div class="spinner"></div>
+            <span>Loading keyboard...</span>
+          </div>
+        </div>
+
+        <div class="included">
+          <h2>What's<br>Included</h2>
+          <ul class="inc-list">
+            <li><div class="check">✓</div> Leopold FC980M Mechanical Keyboard</li>
+            <li><div class="check">✓</div> Detachable USB-C Cable (1.8m)</li>
+            <li><div class="check">✓</div> Premium Keycap Puller</li>
+            <li><div class="check">✓</div> User Manual &amp; Warranty Card</li>
+            <li><div class="check">✓</div> 2-Year Manufacturer Warranty</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Configurator -->
+      <div class="configurator">
+
+        <div class="price-row">
+          <span class="price-main">$189</span>
+          <span class="price-orig">$229</span>
+        </div>
+        <div class="save-badge">Save $40 on Pre-Order</div>
+
+        <!-- COLOUR — changes 3D model colour (not background) -->
+        <div class="cfg-label">Colour</div>
+        <div class="colour-btns">
+          <button class="cbtn c-black active" data-colour="black" onclick="setPreorderColour('black', this)">Black</button>
+          <button class="cbtn c-white"        data-colour="white" onclick="setPreorderColour('white', this)">White</button>
+          <button class="cbtn c-navy"         data-colour="navy"  onclick="setPreorderColour('navy',  this)">Navy</button>
+        </div>
+
+        <!-- SWITCH TYPE -->
+        <div class="cfg-label">Switch Type</div>
+        <div class="switch-btns">
+          <button class="swbtn s-red   active" onclick="selectSwitch(this)">Cherry MX Silent Red</button>
+          <button class="swbtn s-black"        onclick="selectSwitch(this)">Cherry MX Silent Black</button>
+          <button class="swbtn s-brown"        onclick="selectSwitch(this)">Cherry MX Silent Brown</button>
+        </div>
+
+        <!-- ORDER SUMMARY -->
+        <div class="summary">
+          <div class="sum-row"><span>Subtotal</span> <span class="sum-val">$189</span></div>
+          <div class="sum-row"><span>Shipping</span> <span class="sum-val free">FREE</span></div>
+          <div class="sum-row total"><span>Total</span> <span class="sum-val big">$189</span></div>
+        </div>
+
+        <button class="btn-preorder" onclick="alert('Thank you for your pre-order!\nExpected delivery: March 2026')">
+          🛒 Pre-Order Now
+        </button>
+        <p class="delivery-note">Expected Delivery: March 2026</p>
+
+      </div>
+    </div>
+  </main>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

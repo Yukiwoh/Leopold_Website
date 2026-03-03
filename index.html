@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leopold Keyboards — Home</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="home-body" data-page="home">
+
+  <nav>
+    <a class="logo" href="index.html">LEO<span>POLO</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html"    data-page="home">Home</a></li>
+      <li><a href="details.html"  data-page="details">Details</a></li>
+      <li><a href="preorder.html" data-page="preorder">Pre-Order</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- HERO: text left, real keyboard photo right -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="hero-label">First Time here?</p>
+        <h1>Welcome</h1>
+        <p>Leopold is a renowned Korean brand in the mechanical keyboard scene, celebrated for its durable build, customizable layouts, and high-quality switches like Cherry MX and Topre.</p>
+        <a class="btn" href="details.html">LEARN MORE</a>
+      </div>
+      <div class="hero-photo">
+        <img src="assets/hero-keyboard.png"
+             alt="Leopold keyboard on colourful desk mat"
+             style="width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;"/>
+      </div>
+    </section>
+
+    <!-- BESTSELLERS -->
+    <section class="bestsellers">
+      <h2 class="section-title">Leopold Keyboard Bestsellers</h2>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-body">
+            <h3>Leopold FC650MDS</h3>
+            <p>The Leopold FC650MDS is a mechanical keyboard known for its durable design, responsive switches, and customizable keycaps, offering an exceptional typing experience for both professionals and gamers.</p>
+            <a class="btn btn-red" href="details.html">LEARN MORE</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h3>Leopold FC660MBT</h3>
+            <p>The Leopold FC660MBT is a compact, Bluetooth-compatible mechanical keyboard that combines high-performance features with wireless convenience, ideal for users seeking flexibility without compromising on quality.</p>
+            <a class="btn btn-red" href="details.html">LEARN MORE</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h3>Leopold FC750R</h3>
+            <p>The Leopold FC750R is a full-sized mechanical keyboard that delivers excellent tactile feedback and a solid build, perfect for those who require precision and comfort during long typing sessions or gaming marathons.</p>
+            <a class="btn btn-red" href="details.html">LEARN MORE</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM 3D KEYBOARD — static, colour syncs from Details colour picker -->
+    <section class="home-3d-section">
+      <div id="home-kb-viewer" class="canvas-wrap" style="height:300px;">
+        <div id="home-kb-loading" class="loading-overlay">
+          <div class="spinner"></div>
+          <span>Loading keyboard...</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
